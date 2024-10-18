@@ -11,7 +11,7 @@ public class Place
     public string Name { get; protected set; }
     public double CyclesPerEon { get; protected set; }
     public Place? Parent { get; protected set; }
-
+    
     public Place (double _cyclesPerEon, string _name) => 
         (CyclesPerEon, Name, Parent) = (_cyclesPerEon, _name, null);
 
