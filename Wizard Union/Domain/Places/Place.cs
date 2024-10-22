@@ -12,11 +12,12 @@ public class Place
     public double CyclesPerEon { get; protected set; }
     public Place? Parent { get; protected set; }
     
-    public Place (double _cyclesPerEon, string _name) => 
-        (CyclesPerEon, Name, Parent) = (_cyclesPerEon, _name, null);
-
-    public Place(Place _parent, double _cyclesPerParentCycle, string _name) => 
-        (Name, Parent, CyclesPerEon) = (_name, _parent, _parent.CyclesPerEon * _cyclesPerParentCycle);
+    // Main Constructor
+    public Place(double _cyclesPerEon, string _name, Place? _parent = null)
+    {
+        (CyclesPerEon, Name, Parent) =
+        (_cyclesPerEon, _name, _parent);
+    }
 
     public Place SetChildOf(Place _parent) { Parent = _parent; return Parent; }
     public bool IsChildOf(Place _parent) 
