@@ -1,4 +1,5 @@
 ﻿using WizardUnion;
+using WizardUnion.Birth;
 using WizardUnion.Names;
 using WizardUnion.Places;
 
@@ -33,4 +34,8 @@ using WizardUnion.Places;
 //     Spells have a creator/origin
 //     Spells have elemental classings
 
-TestingProgram.Run();
+Universe.Begin(1d);
+
+Wizard ryan = new Wizard(new FullName("Ryan", "Dick"), new BirthDetails(new Place(25d, "Mufat"), 13d));
+
+Console.WriteLine($"{ryan} I am {ryan.BirthDetails.CurrentAgeInEons} eons old.");
