@@ -10,16 +10,22 @@ using WizardUnion;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using WizardUnion.DataAcquisition;
 
 namespace WU_Test
 {
     internal static class TestingProgram
     {
-        internal static List<Place> places = new List<Place>();
+        internal static Place[] places;
+
+        static TestingProgram()
+        {
+            places = Array.Empty<Place>();
+        }
 
         private static void Init(int _args)
         {
-            
+            places = DataAcquirer.AcquirePlaces();
         }
 
         internal static void Run(int _args)

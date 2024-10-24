@@ -19,13 +19,17 @@ namespace WizardUnion.DataAcquisition
         public static SqlConnection connection;
 #pragma warning restore CS8618 
 
+
         public static void InitializeConntectionString()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["WizardUnionDB.Properties.Settings.WizardUnionDBConnectionString"].ConnectionString;
+            // ERROR - operating system error 5 access denied
+            connectionString = HiddenConnectionString.connectionString;
         }
 
         public static Place[] AcquirePlaces()
         {
+            InitializeConntectionString();
+
             // SqlConnection implements IDisposable, so using using() will automatically close the SqlConnection when the using() statement is complete
             // otherwise use conenction.Close()
             // Both of these using() statements will use the same code block
@@ -55,11 +59,12 @@ namespace WizardUnion.DataAcquisition
 
                     places[i].SetChildOf(Array.Find(places, (parent) => parent.Name == (string)place["Name"]));
                 }
-            }
 
-            // Confirm if this works before allowing use, this was moved from test app because app.config is in this domain library
-            // Therefore, all database acquisitions need to come from this library.
-            throw new NotImplementedException();
+                // Confirm if this works before allowing use, this was moved from test app because app.config is in this domain library
+                // Therefore, all database acquisitions need to come from this library.
+
+                return places;
+            }
         }
     }
 }
