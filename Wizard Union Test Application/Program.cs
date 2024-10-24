@@ -2,6 +2,7 @@
 using WizardUnion.Birth;
 using WizardUnion.Names;
 using WizardUnion.Places;
+using WU_Test;
 
 // WHAT PURPOSE DOES THIS APPLICATION SERVE?
 //
@@ -34,8 +35,4 @@ using WizardUnion.Places;
 //     Spells have a creator/origin
 //     Spells have elemental classings
 
-Universe.Begin(1d);
-
-Wizard ryan = new Wizard(new FullName("Ryan", "Dick"), new BirthDetails(new Place(25d, "Mufat"), 13d));
-
-Console.WriteLine($"{ryan} I am {ryan.BirthDetails.CurrentAgeInEons} eons old.");
+TestingProgram.Run(0);

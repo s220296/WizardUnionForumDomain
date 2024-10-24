@@ -19,7 +19,7 @@ public class Place
         (_cyclesPerEon, _name, _parent);
     }
 
-    public Place SetChildOf(Place _parent) { Parent = _parent; return Parent; }
+    public Place? SetChildOf(Place? _parent) { Parent = _parent; return Parent; }
     public bool IsChildOf(Place _parent) 
     {
         Place? iterator = Parent;
