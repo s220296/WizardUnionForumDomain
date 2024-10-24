@@ -20,6 +20,9 @@
 # Mono auto generated files
 mono_crash.*
 
+# Data base directory
+WizardUnionDB/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

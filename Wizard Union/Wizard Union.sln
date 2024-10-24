@@ -5,7 +5,11 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizard Union", "Wizard Union.csproj", "{5B879B87-2B49-4210-A67D-20850E098B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizard Union Test Application", "..\Wizard Union Test Application\Wizard Union Test Application.csproj", "{A0A3FFCD-EF41-4A16-9FC9-338EC45685C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizard Union Test Application", "..\Wizard Union Test Application\Wizard Union Test Application.csproj", "{A0A3FFCD-EF41-4A16-9FC9-338EC45685C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{3D044712-9E02-4191-A61F-827C3B3EF31A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardUnionDB", "..\WizardUnionDB\WizardUnionDB.csproj", "{FA32F5D5-03AA-447F-9939-82028CBD135D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{A0A3FFCD-EF41-4A16-9FC9-338EC45685C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0A3FFCD-EF41-4A16-9FC9-338EC45685C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0A3FFCD-EF41-4A16-9FC9-338EC45685C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA32F5D5-03AA-447F-9939-82028CBD135D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA32F5D5-03AA-447F-9939-82028CBD135D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA32F5D5-03AA-447F-9939-82028CBD135D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA32F5D5-03AA-447F-9939-82028CBD135D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FA32F5D5-03AA-447F-9939-82028CBD135D} = {3D044712-9E02-4191-A61F-827C3B3EF31A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE75B702-FC43-4DDF-9E99-BE29B3FB0E59}

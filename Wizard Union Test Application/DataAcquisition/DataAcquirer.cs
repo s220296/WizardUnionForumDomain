@@ -22,11 +22,7 @@ namespace WizardUnion.DataAcquisition
 
         public static void InitializeConntectionString()
         {
-            // ERROR - operating system error 5 access denied
-            
-            // Probs a bad idea to have database as a part of the domain library, just scrap all of this tomorrow and seperate database from library
-
-            connectionString = HiddenConnectionString.connectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["WizardUnionDBConnectionString"].ConnectionString;
         }
 
         public static Place[] AcquirePlaces()
