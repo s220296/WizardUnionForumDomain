@@ -16,16 +16,16 @@ namespace WU_Test
 {
     internal static class TestingProgram
     {
-        internal static Place[] places;
+        internal static Wizard[] wizards;
 
         static TestingProgram()
         {
-            places = Array.Empty<Place>();
+            wizards = Array.Empty<Wizard>();
         }
 
         private static void Init(int _args)
         {
-            places = DataAcquirer.AcquirePlaces();
+            wizards = DataAcquirer.AcquireAllWizards();
         }
 
         internal static void Run(int _args)
@@ -34,14 +34,11 @@ namespace WU_Test
 
             Universe.Begin(1d);
 
-            Wizard ryan = new Wizard(new FullName("Ryan", "Dick"), new BirthDetails(new Place(25d, "Mufat"), 13d));
-
-            Console.WriteLine($"{ryan} I am {ryan.BirthDetails.CurrentAgeInEons} eons old.");
-            Console.WriteLine("===========================================");
-            foreach(Place place in places)
+            Console.WriteLine("================WIZARDS======================");
+            foreach(Wizard wizard in wizards)
             {
                 Console.WriteLine("-------------------------");
-                place.WriteLineage();
+                Console.WriteLine(wizard.Name.Get());
                 Console.WriteLine("-------------------------");
             }
         }

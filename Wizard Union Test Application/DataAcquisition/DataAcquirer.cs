@@ -25,7 +25,7 @@ namespace WizardUnion.DataAcquisition
             connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\.GitHub\\WizardUnionForumDomain\\WizardUnionDB\\ForumData.mdf;Integrated Security=True;Connect Timeout=30";
         }
 
-        public static Place[] AcquirePlaces()
+        public static Wizard[] AcquireAllWizards()
         {
             InitializeConntectionString();
 
@@ -33,36 +33,25 @@ namespace WizardUnion.DataAcquisition
             // otherwise use conenction.Close()
             // Both of these using() statements will use the same code block
             using (connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Place", connection))
+            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Wizards", connection))
             {
                 // Normally connection.Open() would be used here, however the SqlDataAdapter does this for us
 
-                DataTable placeTable = new DataTable();
-                int rows = adapter.Fill(placeTable);
+                DataTable wizardTable = new DataTable();
+                int rows = adapter.Fill(wizardTable);
 
-                Place[] places = new Place[rows];
+                Wizard[] wizards = new Wizard[rows];
+                BirthDetails defaultDetails = new BirthDetails(Universe.Place, 0.5d);
 
-                // Fill places (without parents)
-                for (int i = 0; i < rows; i++)
+                Console.WriteLine(wizardTable.TableName); 
+
+                for (int i = 0; i < rows; i ++)
                 {
-                    DataRow currentRow = placeTable.Rows[i];
-                    places[i] = new Place((double)currentRow["Cycles Per Eon"], (string)currentRow["Name"]);
-                }
-                // Assign parents to places
-                for (int i = 0; i < rows; i++)
-                {
-                    DataRow currentRow = placeTable.Rows[i];
-                    DataRow? place = placeTable.Rows.Find(currentRow["ParentId"]);
-
-                    if (place == null) continue;
-
-                    places[i].SetChildOf(Array.Find(places, (parent) => parent.Name == (string)place["Name"]));
+                    string name = (string)wizardTable.Rows[i]["Name"];
+                    wizards[i] = new Wizard(new Names.SingleName(name), defaultDetails);
                 }
 
-                // Confirm if this works before allowing use, this was moved from test app because app.config is in this domain library
-                // Therefore, all database acquisitions need to come from this library.
-
-                return places;
+                return wizards;
             }
         }
     }
