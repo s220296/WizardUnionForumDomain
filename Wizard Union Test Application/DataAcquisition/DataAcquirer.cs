@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +21,8 @@ namespace WizardUnion.DataAcquisition
 
         public static void InitializeConntectionString()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["WizardUnionDBConnectionString"].ConnectionString;
+            // I tried to use the ConfigurationManager, but it just wouldn't work
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\.GitHub\\WizardUnionForumDomain\\WizardUnionDB\\ForumData.mdf;Integrated Security=True;Connect Timeout=30";
         }
 
         public static Place[] AcquirePlaces()
