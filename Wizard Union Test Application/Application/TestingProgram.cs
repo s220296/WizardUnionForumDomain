@@ -10,7 +10,7 @@ using WizardUnion;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
-using WizardUnion.DataAcquisition;
+using WU_Test.DataAcquisition;
 
 namespace WU_Test
 {
@@ -38,7 +38,7 @@ namespace WU_Test
             foreach(Wizard wizard in wizards)
             {
                 Console.WriteLine("-------------------------");
-                Console.WriteLine(wizard.Name.Get());
+                Console.WriteLine("My name is " + wizard.Name.Get());
                 Console.WriteLine("-------------------------");
             }
         }

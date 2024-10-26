@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using Microsoft.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WizardUnion.Birth;
-using WizardUnion.Places;
+using WizardUnion.Names;
+using WizardUnion;
 
-namespace WizardUnion.DataAcquisition
+namespace WU_Test.DataAcquisition
 {
     public static class DataAcquirer
     {
@@ -48,7 +44,7 @@ namespace WizardUnion.DataAcquisition
                 for (int i = 0; i < rows; i ++)
                 {
                     string name = (string)wizardTable.Rows[i]["Name"];
-                    wizards[i] = new Wizard(new Names.SingleName(name), defaultDetails);
+                    wizards[i] = new Wizard(new SingleName(name), defaultDetails);
                 }
 
                 return wizards;
