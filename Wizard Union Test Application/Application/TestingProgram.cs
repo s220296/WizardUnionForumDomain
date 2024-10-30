@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WizardUnion.Birth;
-using WizardUnion.Names;
-using WizardUnion.Places;
-using WizardUnion;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Data;
+﻿using WizardUnion;
 using WU_Test.DataAcquisition;
 
 namespace WU_Test
@@ -35,10 +24,10 @@ namespace WU_Test
             Universe.Begin(1d);
 
             Console.WriteLine("================WIZARDS======================");
-            foreach(Wizard wizard in wizards)
+            foreach (Wizard wizard in wizards)
             {
                 Console.WriteLine("-------------------------");
-                Console.WriteLine("My name is " + wizard.Name.Get());
+                Console.WriteLine("My name is " + wizard.Name.Get() + " and I am from " + wizard.BirthDetails.PlaceOfBirth);
                 Console.WriteLine("-------------------------");
             }
         }

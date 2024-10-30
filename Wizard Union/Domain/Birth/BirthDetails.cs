@@ -15,7 +15,11 @@ public class BirthDetails
     public double CurrentAgeInEons => PlaceOfBirth.CyclesSinceCycle(CycleOfBirth) / PlaceOfBirth.CyclesPerEon;
 
     public BirthDetails(Place _placeOfBirth, double _cycleOfBirth)
-        { PlaceOfBirth = _placeOfBirth; CycleOfBirth = _cycleOfBirth; }
+    {
+        _cycleOfBirth = Math.Clamp(_cycleOfBirth, 0, _placeOfBirth.AgeInCycles());
+
+        (PlaceOfBirth, CycleOfBirth) = (_placeOfBirth, _cycleOfBirth);
+    }
 
     //public int Age(IAgeFormatter _formatter);
 

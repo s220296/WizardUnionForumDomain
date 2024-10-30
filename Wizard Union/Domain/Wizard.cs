@@ -11,8 +11,8 @@ namespace WizardUnion;
 
 public class Wizard
 {
-    // school of magic
     // union membership
+    // school of magic
     // known spells
     public BirthDetails BirthDetails { get; protected set; }
     public IName Name { get; protected set; }

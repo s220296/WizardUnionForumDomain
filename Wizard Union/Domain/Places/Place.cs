@@ -9,6 +9,8 @@ public class Place
     // Main Constructor
     public Place(double _cyclesPerEon, string _name, Place? _parent = null)
     {
+        _cyclesPerEon = Math.Clamp(_cyclesPerEon, 0, double.MaxValue);
+
         (CyclesPerEon, Name, Parent) =
         (_cyclesPerEon, _name, _parent);
     }
