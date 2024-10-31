@@ -26,5 +26,14 @@ public class SpellProfileList : List<SpellProfile>
         return result;
     }
 
+    public SpellProfileList GetSpellsOfMastery(string _mastery)
+    {
+        
+        // TODO: Create a SpellMastery struct that contains a string, this struct will handle all of the validation/sanitisation
+
+        SpellProfileList result = new SpellProfileList(this);
+        result.RemoveAll
+    }
+
     public bool IsEmpty() => Count == 0;
 }
