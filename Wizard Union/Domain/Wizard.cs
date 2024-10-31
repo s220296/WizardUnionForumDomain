@@ -15,7 +15,7 @@ public class Wizard
     public Wizard(IName _name, BirthDetails _birthDetails, MagicProfile _magicProfile)
     {
         (Name, BirthDetails, MagicProfile) = (_name, _birthDetails, _magicProfile);
-        UnionMemberships = new UnionMembershipList();
+        UnionMemberships = new UnionMembershipList(this);
     }
 
     public override string ToString()

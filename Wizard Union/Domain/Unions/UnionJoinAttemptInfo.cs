@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WizardUnion.Unions;
+﻿namespace WizardUnion.Unions;
 
 public enum UnionJoinAttemptInfo : int
 {
     ERROR = -3000,
+
+    ALREADY_JOINED = 0,
 
     DECLINED = 1,
     REQUESTED = 2,
