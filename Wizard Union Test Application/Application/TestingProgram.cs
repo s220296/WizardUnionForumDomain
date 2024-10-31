@@ -1,5 +1,4 @@
 ﻿using WizardUnion;
-using WU_Test.DataAcquisition;
 
 namespace WU_Test
 {

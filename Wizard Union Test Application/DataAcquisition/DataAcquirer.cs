@@ -5,7 +5,7 @@ using WizardUnion.Birth;
 using WizardUnion.MagicAndSpells;
 using WizardUnion.Names;
 
-namespace WU_Test.DataAcquisition
+namespace WU_Test
 {
     public static class DataAcquirer
     {

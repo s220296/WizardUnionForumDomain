@@ -8,7 +8,8 @@
 // Functionality --
 //   Union profiles can be created
 //     Unions contain members
-//     Unions have entry requirements
+//     Union members can have roles
+//     Unions can have entry requirements
 //     Unions have names
 //     Unions can host message boards internally or between unions
 //     
