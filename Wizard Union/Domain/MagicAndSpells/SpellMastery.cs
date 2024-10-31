@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WizardUnion.MagicAndSpells;
+﻿namespace WizardUnion.MagicAndSpells;
 
 public struct SpellMastery : IEquatable<SpellMastery>, IComparable<SpellMastery>, IEquatable<string>, IComparable<string>
 {

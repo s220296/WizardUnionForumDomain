@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WizardUnion.MagicAndSpells;
-
-namespace WizardUnion.MagicAndSpells;
+﻿namespace WizardUnion.MagicAndSpells;
 
 public class SpellProfileList : List<SpellProfile>
 {
@@ -14,10 +7,10 @@ public class SpellProfileList : List<SpellProfile>
     public SpellProfileList() : base()
     { }
 
-    public SpellProfileList(int _capacity) : base(_capacity) 
+    public SpellProfileList(int _capacity) : base(_capacity)
     { }
 
-    public SpellProfileList(IEnumerable<SpellProfile> _collection) : base(_collection) 
+    public SpellProfileList(IEnumerable<SpellProfile> _collection) : base(_collection)
     { }
 
     public SpellProfileList SortedBy(IComparer<SpellProfile> _comparer)
@@ -44,7 +37,7 @@ public class SpellProfileList : List<SpellProfile>
     public SpellProfileList GetSpellsWithoutAttribute(SpellAttribute _attribute)
     {
         SpellProfileList result = new SpellProfileList(this);
-        result.RemoveAll((spell) => spell.Attributes.HasAttribute(_attribute.GetID()));  
+        result.RemoveAll((spell) => spell.Attributes.HasAttribute(_attribute.GetID()));
         return result;
     }
 

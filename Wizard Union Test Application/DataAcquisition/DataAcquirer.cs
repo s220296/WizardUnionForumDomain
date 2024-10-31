@@ -1,9 +1,9 @@
-﻿using System.Data;
-using Microsoft.Data.SqlClient;
-using WizardUnion.Birth;
-using WizardUnion.Names;
+﻿using Microsoft.Data.SqlClient;
+using System.Data;
 using WizardUnion;
+using WizardUnion.Birth;
 using WizardUnion.MagicAndSpells;
+using WizardUnion.Names;
 
 namespace WU_Test.DataAcquisition
 {
@@ -41,9 +41,9 @@ namespace WU_Test.DataAcquisition
                 BirthDetails defaultDetails = new BirthDetails(Universe.Place, 0.5d);
                 MagicProfile defaultProfile = new MagicProfile(new SpellMastery(), SpellProfileList.Empty);
 
-                Console.WriteLine(wizardTable.TableName); 
+                Console.WriteLine(wizardTable.TableName);
 
-                for (int i = 0; i < rows; i ++)
+                for (int i = 0; i < rows; i++)
                 {
                     string name = (string)wizardTable.Rows[i]["Name"];
                     wizards[i] = new Wizard(new SingleName(name), defaultDetails, defaultProfile);
