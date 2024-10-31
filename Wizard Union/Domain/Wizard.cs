@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WizardUnion.Names;
 using WizardUnion.Places;
 using WizardUnion.Birth;
-using WizardUnion.Domain.MagicProfile;
+using WizardUnion.MagicAndSpells;
 
 namespace WizardUnion;
 

@@ -20,8 +20,8 @@ using WU_Test;
 //     -Wizards have names
 //     -Wizards have ages
 //     -Wizards have places of birth
-//     Wizards can register spells
-//     Wizards have elemental masteries
+//     -Wizards can register spells
+//     -Wizards have elemental masteries
 //     Wizards can join unions
 //     Wizards can message on message boards
 //     Wizards can message other wizards

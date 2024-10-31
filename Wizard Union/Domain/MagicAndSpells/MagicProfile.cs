@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WizardUnion.Domain.MagicAndSpells;
+using WizardUnion.MagicAndSpells;
 
-namespace WizardUnion.Domain.MagicProfile;
+namespace WizardUnion.MagicAndSpells;
 
 public class MagicProfile
 {

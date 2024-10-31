@@ -1,4 +1,5 @@
 ﻿using WizardUnion;
+using WizardUnion.MagicAndSpells;
 using WU_Test.DataAcquisition;
 
 namespace WU_Test
@@ -28,6 +29,7 @@ namespace WU_Test
             {
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("My name is " + wizard.Name.Get() + " and I am from " + wizard.BirthDetails.PlaceOfBirth);
+                Console.WriteLine("I know " + wizard.MagicProfile.KnownSpells.Count + " spells.");
                 Console.WriteLine("-------------------------");
             }
         }

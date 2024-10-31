@@ -5,11 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WizardUnion.Domain.MagicAndSpells;
+namespace WizardUnion.MagicAndSpells;
 
 public struct SpellMastery : IEquatable<SpellMastery>, IComparable<SpellMastery>, IEquatable<string>, IComparable<string>
 {
     public string Name { get; private set; }
+
+    public SpellMastery()
+    {
+        Name = "None";
+    }
 
     public SpellMastery(string _name)
     {
@@ -49,5 +54,10 @@ public struct SpellMastery : IEquatable<SpellMastery>, IComparable<SpellMastery>
     public override int GetHashCode()
     {
         return Name.GetHashCode();
+    }
+
+    public override string ToString()
+    {
+        return Name;
     }
 }

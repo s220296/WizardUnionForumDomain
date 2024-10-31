@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WizardUnion.Domain.MagicAndSpells;
+using WizardUnion.MagicAndSpells;
 
-namespace WizardUnion.Domain.MagicProfile;
+namespace WizardUnion.MagicAndSpells;
 
 public class SpellProfileList : List<SpellProfile>
 {
@@ -37,14 +37,14 @@ public class SpellProfileList : List<SpellProfile>
     public SpellProfileList GetSpellsWithAttribute(SpellAttribute _attribute)
     {
         SpellProfileList result = new SpellProfileList(this);
-        result.RemoveAll((spell) => !spell.Attributes.HasAttribute(_attribute.ID));
+        result.RemoveAll((spell) => !spell.Attributes.HasAttribute(_attribute.GetID()));
         return result;
     }
 
     public SpellProfileList GetSpellsWithoutAttribute(SpellAttribute _attribute)
     {
         SpellProfileList result = new SpellProfileList(this);
-        result.RemoveAll((spell) => spell.Attributes.HasAttribute(_attribute.ID));  
+        result.RemoveAll((spell) => spell.Attributes.HasAttribute(_attribute.GetID()));  
         return result;
     }
 

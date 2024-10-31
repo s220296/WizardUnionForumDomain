@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WizardUnion.Domain.MagicAndSpells;
+namespace WizardUnion.MagicAndSpells;
 
 public abstract class SpellAttribute
 {
-    public int ID;
+    protected int ID;
+
+    public abstract int GetID();
 }

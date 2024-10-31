@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using WizardUnion.Birth;
 using WizardUnion.Names;
 using WizardUnion;
+using WizardUnion.MagicAndSpells;
 
 namespace WU_Test.DataAcquisition
 {
@@ -38,13 +39,14 @@ namespace WU_Test.DataAcquisition
 
                 Wizard[] wizards = new Wizard[rows];
                 BirthDetails defaultDetails = new BirthDetails(Universe.Place, 0.5d);
+                MagicProfile defaultProfile = new MagicProfile(new SpellMastery(), SpellProfileList.Empty);
 
                 Console.WriteLine(wizardTable.TableName); 
 
                 for (int i = 0; i < rows; i ++)
                 {
                     string name = (string)wizardTable.Rows[i]["Name"];
-                    wizards[i] = new Wizard(new SingleName(name), defaultDetails);
+                    wizards[i] = new Wizard(new SingleName(name), defaultDetails, defaultProfile);
                 }
 
                 return wizards;
