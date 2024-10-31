@@ -16,6 +16,9 @@ public class Union
 
     internal UnionJoinAttemptInfo TryJoin(Wizard _wizard)
     {
-        return m_conditions.IsSatisfiedBy(_wizard);
+        if (m_members.Contains(_wizard)) 
+            return UnionJoinAttemptInfo.JOINED;
+        else 
+            return m_conditions.IsSatisfiedBy(_wizard);
     }
 }
