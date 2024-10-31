@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WizardUnion.Places;
+﻿namespace WizardUnion.Places;
 
 public static class PlaceSystemExtensions
 {
@@ -29,7 +23,7 @@ public static class PlaceSystemExtensions
         }
 
         placesInReverse.Reverse();
-        foreach(Place place in placesInReverse)
+        foreach (Place place in placesInReverse)
         {
             Console.WriteLine(place.Name);
             if (place != placesInReverse.Last()) Console.WriteLine("  |  ");

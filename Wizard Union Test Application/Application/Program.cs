@@ -1,8 +1,4 @@
-﻿using WizardUnion;
-using WizardUnion.Birth;
-using WizardUnion.Names;
-using WizardUnion.Places;
-using WU_Test;
+﻿using WU_Test;
 
 // WHAT PURPOSE DOES THIS APPLICATION SERVE?
 //
