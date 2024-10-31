@@ -16,6 +16,7 @@ public class BirthDetails
 
     public BirthDetails(Place _placeOfBirth, double _cycleOfBirth)
     {
+        // Validation
         _cycleOfBirth = Math.Clamp(_cycleOfBirth, 0, _placeOfBirth.AgeInCycles());
 
         (PlaceOfBirth, CycleOfBirth) = (_placeOfBirth, _cycleOfBirth);

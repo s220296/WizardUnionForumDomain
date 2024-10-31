@@ -17,9 +17,9 @@ using WU_Test;
 //     Unions can host message boards internally or between unions
 //     
 //   Wizard profiles can be created
-//     Wizards have names
-//     Wizards have ages
-//     Wizards have places of birth
+//     -Wizards have names
+//     -Wizards have ages
+//     -Wizards have places of birth
 //     Wizards can register spells
 //     Wizards have elemental masteries
 //     Wizards can join unions
@@ -27,12 +27,12 @@ using WU_Test;
 //     Wizards can message other wizards
 //
 //   Places can be registered on the forum
-//     Places have cycle rates per eon, like universal time zones
-//     Places can be a part of other places, e.g. planet in a galaxy
+//     -Places have cycle rates per eon, like universal time zones
+//     -Places can be a part of other places, e.g. planet in a galaxy
 //
 //   Spells can be registered on the forum
-//     Spells have attributes, e.g. cast time, casting speeches, casting actions, casting costs, etc.
-//     Spells have a creator/origin
-//     Spells have elemental classings
+//     -Spells have attributes, e.g. cast time, casting speeches, casting actions, casting costs, etc.
+//     -Spells have a creator/origin
+//     -Spells have elemental classings
 
 TestingProgram.Run(0);

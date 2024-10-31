@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 using WizardUnion.Names;
 using WizardUnion.Places;
 using WizardUnion.Birth;
+using WizardUnion.Domain.MagicProfile;
 
 namespace WizardUnion;
 
 public class Wizard
 {
     // union membership
-    // school of magic
-    // known spells
+    public MagicProfile MagicProfile { get; protected set; }
     public BirthDetails BirthDetails { get; protected set; }
     public IName Name { get; protected set; }
  
-    public Wizard(IName _name, BirthDetails _birthDetails) => 
-        (Name, BirthDetails) = (_name, _birthDetails);
+    public Wizard(IName _name, BirthDetails _birthDetails, MagicProfile _magicProfile) => 
+        (Name, BirthDetails, MagicProfile) = (_name, _birthDetails, _magicProfile);
 
     public override string ToString()
     {
