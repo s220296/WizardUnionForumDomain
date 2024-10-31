@@ -3,10 +3,10 @@
 public class UnionMembership
 {
     public Union Union { get; protected set; }
-    // Wizard's role within this Union
+    public IUnionRole Role { get; protected set; }
 
-    public UnionMembership(Union _union)
+    public UnionMembership(Union _union, IUnionRole _role)
     {
-        (Union) = (_union);
+        (Union, Role) = (_union, _role);
     }
 }
