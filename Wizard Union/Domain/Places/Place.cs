@@ -10,12 +10,19 @@ public class Place
     public Place(double _cyclesPerEon, string _name, Place? _parent = null)
     {
         _cyclesPerEon = Math.Clamp(_cyclesPerEon, 0, double.MaxValue);
+        if (_parent == null) _parent = Universe.Place;
 
         (CyclesPerEon, Name, Parent) =
         (_cyclesPerEon, _name, _parent);
     }
 
-    public Place? SetChildOf(Place? _parent) { Parent = _parent; return Parent; }
+    public Place? SetChildOf(Place? _parent) 
+    {
+        if (_parent == null) _parent = Universe.Place;
+        Parent = _parent; 
+        return Parent; 
+    }
+
     public bool IsChildOf(Place _parent)
     {
         Place? iterator = Parent;
@@ -38,4 +45,6 @@ public class Place
     {
         return Name;
     }
+
+    internal void RemoveParent() => Parent = null;
 }

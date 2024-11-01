@@ -36,17 +36,24 @@ namespace WU_Test
             Universe.Begin(1.32d);
 
             WriteSubheading("WIZARDS");
+
             foreach ((Wizard wizard, int ID) wizard in wizards)
             {
                 Console.WriteLine("My name is " + wizard.wizard.Name.Get() + " and I am from " + wizard.wizard.BirthDetails.PlaceOfBirth + ".");
                 Console.WriteLine("I am " + wizard.wizard.BirthDetails.CurrentAgeInEons + " eons old and I know " + wizard.wizard.MagicProfile.KnownSpells.Count + " spells.");
                 WriteSeperator();
             }
+            Console.WriteLine("");
 
             WriteSubheading("PLACES");
+
+            Console.WriteLine(Universe.Place.Name + " is currently in cycle " + Universe.Place.AgeInCycles());
+            WriteSeperator();
+
             foreach ((Place place, int ID) place in places)
             {
                 Console.WriteLine(place.place.Name + " is currently in cycle " + place.place.AgeInCycles() + ".");
+                Console.WriteLine("\tLineage:");
                 place.place.WriteLineage();
                 WriteSeperator();
             }
