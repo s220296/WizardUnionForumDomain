@@ -15,6 +15,12 @@ public class UnionMembershipList
         m_owner = _owner;
     }
 
+    public void AddMembership(UnionMembership _membership)
+    {
+        if (!m_unionMembershipList.Contains(_membership))
+            m_unionMembershipList.Add(_membership);
+    }
+
     public UnionJoinAttemptInfo TryJoin(Union _union)
     {
         UnionJoinAttemptInfo info = _union.TryJoin(m_owner);

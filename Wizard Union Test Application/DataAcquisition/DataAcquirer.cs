@@ -4,6 +4,7 @@ using WizardUnion;
 using WizardUnion.Birth;
 using WizardUnion.MagicAndSpells;
 using WizardUnion.Names;
+using WizardUnion.Places;
 
 namespace WU_Test
 {
@@ -22,7 +23,7 @@ namespace WU_Test
             connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\.GitHub\\WizardUnionForumDomain\\WizardUnionDB\\ForumData.mdf;Integrated Security=True;Connect Timeout=30";
         }
 
-        public static Wizard[] AcquireAllWizards()
+        public static (Wizard, int)[] AcquireAllWizards()
         {
             InitializeConntectionString();
 
@@ -37,19 +38,64 @@ namespace WU_Test
                 DataTable wizardTable = new DataTable();
                 int rows = adapter.Fill(wizardTable);
 
-                Wizard[] wizards = new Wizard[rows];
+                // Initialize
+                (Wizard wizard, int ID)[] wizards = new (Wizard, int)[rows];
                 BirthDetails defaultDetails = new BirthDetails(Universe.Place, 0.5d);
                 MagicProfile defaultProfile = new MagicProfile(new SpellMastery(), SpellProfileList.Empty);
 
-                Console.WriteLine(wizardTable.TableName);
-
+                // Retrieve all wizards from DB
                 for (int i = 0; i < rows; i++)
                 {
                     string name = (string)wizardTable.Rows[i]["Name"];
-                    wizards[i] = new Wizard(new SingleName(name), defaultDetails, defaultProfile);
+                    int ID = (int)wizardTable.Rows[i]["Id"];
+
+                    wizards[i].wizard = new Wizard(new SingleName(name), defaultDetails, defaultProfile);
+                    wizards[i].ID = ID;
                 }
 
                 return wizards;
+            }
+        }
+
+        public static (Place, int)[] AcquireAllPlaces()
+        {
+            InitializeConntectionString();
+
+            using (connection = new SqlConnection(connectionString))
+            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Places", connection))
+            {
+                DataTable placeTable = new DataTable();
+                int rows = adapter.Fill(placeTable);
+
+                // Initialize
+                (Place place, int ID)[] places = new (Place, int)[rows];
+
+                // Retrieve all places from DB
+                for (int i = 0; i < rows; i++)
+                {
+                    string name = (string)placeTable.Rows[i]["Name"];
+                    double cyclesPerEon = (double)placeTable.Rows[i]["CyclesPerEon"];
+                    int ID = (int)placeTable.Rows[i]["Id"];
+
+                    places[i].place = new Place(cyclesPerEon, name);
+                    places[i].ID = ID;
+                }
+
+                // Set parents for all places
+                for (int j = 0; j < rows; j++)
+                {
+                    object parentID = placeTable.Rows[j]["Parent"];
+                    if (parentID.GetType() != typeof(DBNull))
+                    {
+                       for (int i = 0; i < rows; i++)
+                       {
+                            if (places[i].ID == (int)parentID)
+                                places[j].place.SetChildOf(places[i].place);
+                       }
+                    }
+                }
+
+                return places;
             }
         }
     }

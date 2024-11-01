@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Wizard Union\Wizard Union.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SQLQueries\" />
+  </ItemGroup>
+
 </Project>
