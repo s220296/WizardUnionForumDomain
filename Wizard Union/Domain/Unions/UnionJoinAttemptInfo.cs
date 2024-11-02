@@ -6,7 +6,9 @@ public enum UnionJoinAttemptInfo : int
 
     ALREADY_JOINED = 0,
 
-    DECLINED = 1,
-    REQUESTED = 2,
-    JOINED = 3,
+    DECLINED = 1000,
+
+    REQUESTED = 2000,
+
+    JOINED = 3000,
 }
