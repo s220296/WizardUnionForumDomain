@@ -7,23 +7,25 @@ namespace WU_Test;
 
 internal static class TestingProgram
 {
-    internal static (Wizard wizard, int ID)[] wizards;
-    internal static (Place place, int ID)[] places;
-    internal static (Union union, int ID)[] unions;
-    internal static (SpellProfile spell, int ID)[] spells;
+    internal static IDItem<Wizard>[] wizards;
+    internal static IDItem<Place>[] places;
+    internal static IDItem<Union>[] unions;
+    internal static IDItem<SpellProfile>[] spells;
 
     static TestingProgram()
     {
-        wizards = Array.Empty<(Wizard, int)>();
-        places = Array.Empty<(Place, int)>();
-        unions = Array.Empty<(Union, int)>();
-        spells = Array.Empty<(SpellProfile, int)>();
+        wizards = Array.Empty<IDItem<Wizard>>();
+        places = Array.Empty<IDItem<Place>>();
+        unions = Array.Empty<IDItem<Union>>();
+        spells = Array.Empty<IDItem<SpellProfile>>();
     }
 
     private static void Init(int _args)
     {
+#pragma warning disable CA1416
         Console.SetWindowSize(100, 80);
         Console.SetWindowPosition(1, 1);
+#pragma warning restore CA1416
 
         wizards = DataAcquirer.AcquireAllWizards();
         places = DataAcquirer.AcquireAllPlaces();
@@ -37,10 +39,10 @@ internal static class TestingProgram
 
         WriteSubheading("WIZARDS");
 
-        foreach ((Wizard wizard, int ID) wizard in wizards)
+        foreach (IDItem<Wizard> wizard in wizards)
         {
-            Console.WriteLine("My name is " + wizard.wizard.Name.Get() + " and I am from " + wizard.wizard.BirthDetails.PlaceOfBirth + ".");
-            Console.WriteLine("I am " + wizard.wizard.BirthDetails.CurrentAgeInEons + " eons old and I know " + wizard.wizard.MagicProfile.KnownSpells.Count + " spells.");
+            Console.WriteLine("My name is " + wizard.Item.Name.Get() + " and I am from " + wizard.Item.BirthDetails.PlaceOfBirth + ".");
+            Console.WriteLine("I am " + wizard.Item.BirthDetails.CurrentAgeInEons + " eons old and I know " + wizard.Item.MagicProfile.KnownSpells.Count + " spells.");
             WriteSeperator();
         }
         Console.WriteLine("");
@@ -50,11 +52,11 @@ internal static class TestingProgram
         Console.WriteLine(Universe.Place.Name + " is currently in cycle " + Universe.Place.AgeInCycles());
         WriteSeperator();
 
-        foreach ((Place place, int ID) place in places)
+        foreach (IDItem<Place> place in places)
         {
-            Console.WriteLine(place.place.Name + " is currently in cycle " + place.place.AgeInCycles() + ".");
+            Console.WriteLine(place.Item.Name + " is currently in cycle " + place.Item.AgeInCycles() + ".");
             Console.WriteLine("\tLineage:");
-            place.place.WriteLineage();
+            place.Item.WriteLineage();
             WriteSeperator();
         }
     }

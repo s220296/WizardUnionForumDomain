@@ -2,5 +2,5 @@
 
 public interface IMessageReceiver
 {
-    bool ReceiveMessage(Message _message);
+    bool ReceiveMessage(IMessage _message, IMessageSender _sender);
 }

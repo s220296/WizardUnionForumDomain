@@ -1,6 +1,4 @@
-﻿using WU_Test;
-
-// WHAT PURPOSE DOES THIS APPLICATION SERVE?
+﻿// WHAT PURPOSE DOES THIS APPLICATION SERVE?
 //
 // The purpose of this application is to be a social media forum where Wizards can create
 // profiles and join unions to discuss current conflicts in the universe,
@@ -32,4 +30,19 @@
 //     -Spells have a creator/origin
 //     -Spells have elemental classings
 
+#define STANDARD_TEST
+#define ALL_TEST
+#define MESSAGE_TEST
+
+#undef ALL_TEST
+#undef STANDARD_TEST
+
+using WU_Test;
+
+#if MESSAGE_TEST || ALL_TEST
+MessagingTest.Run(0);
+#endif
+
+#if STANDARD_TEST || ALL_TEST
 TestingProgram.Run(0);
+#endif

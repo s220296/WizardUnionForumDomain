@@ -23,7 +23,7 @@ public static class DataAcquirer
         connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\.GitHub\\WizardUnionForumDomain\\WizardUnionDB\\ForumData.mdf;Integrated Security=True;Connect Timeout=30";
     }
 
-    public static (Wizard, int)[] AcquireAllWizards()
+    public static IDItem<Wizard>[] AcquireAllWizards()
     {
         InitializeConntectionString();
 
@@ -39,7 +39,7 @@ public static class DataAcquirer
             int rows = adapter.Fill(wizardTable);
 
             // Initialize
-            (Wizard wizard, int ID)[] wizards = new (Wizard, int)[rows];
+            IDItem<Wizard>[] wizards = new IDItem<Wizard>[rows];
             BirthDetails defaultDetails = new BirthDetails(Universe.Place, 0.5d);
             MagicProfile defaultProfile = new MagicProfile(new SpellMastery(), SpellProfileList.Empty);
 
@@ -49,7 +49,7 @@ public static class DataAcquirer
                 string name = (string)wizardTable.Rows[i]["Name"];
                 int ID = (int)wizardTable.Rows[i]["Id"];
 
-                wizards[i].wizard = new Wizard(new SingleName(name), defaultDetails, defaultProfile);
+                wizards[i].Item = new Wizard(new SingleName(name), defaultDetails, defaultProfile);
                 wizards[i].ID = ID;
             }
 
@@ -57,7 +57,7 @@ public static class DataAcquirer
         }
     }
 
-    public static (Place, int)[] AcquireAllPlaces()
+    public static IDItem<Place>[] AcquireAllPlaces()
     {
         InitializeConntectionString();
 
@@ -68,7 +68,7 @@ public static class DataAcquirer
             int rows = adapter.Fill(placeTable);
 
             // Initialize
-            (Place place, int ID)[] places = new (Place, int)[rows];
+            IDItem<Place>[] places = new IDItem<Place>[rows];
 
             // Retrieve all places from DB
             for (int i = 0; i < rows; i++)
@@ -77,7 +77,7 @@ public static class DataAcquirer
                 double cyclesPerEon = (double)placeTable.Rows[i]["CyclesPerEon"];
                 int ID = (int)placeTable.Rows[i]["Id"];
 
-                places[i].place = new Place(cyclesPerEon, name);
+                places[i].Item = new Place(cyclesPerEon, name);
                 places[i].ID = ID;
             }
 
@@ -90,7 +90,7 @@ public static class DataAcquirer
                    for (int i = 0; i < rows; i++)
                    {
                         if (places[i].ID == (int)parentID)
-                            places[j].place.SetChildOf(places[i].place);
+                            places[j].Item.SetChildOf(places[i].Item);
                    }
                 }
             }
