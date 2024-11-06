@@ -20,6 +20,6 @@ public class Wizard
 
     public override string ToString()
     {
-        return $"I am {Name.Get()} from {BirthDetails.PlaceOfBirth}.";
+        return $"{Name.Get()} from {BirthDetails.PlaceOfBirth}.";
     }
 }

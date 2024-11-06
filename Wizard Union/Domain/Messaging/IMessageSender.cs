@@ -2,6 +2,6 @@
 
 public interface IMessageSender
 {
-    bool GetSender<T>(out T _sender);
+    object GetSender();
     bool SendMessage(IMessage _message, IMessageReceiver _receiver);
 }

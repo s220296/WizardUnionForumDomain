@@ -40,9 +40,11 @@
 using WU_Test;
 
 #if MESSAGE_TEST || ALL_TEST
+Console.WriteLine("MESSAGE_TEST\n");
 MessagingTest.Run(0);
 #endif
 
 #if STANDARD_TEST || ALL_TEST
+Console.WriteLine("STANDARD_TEST\n");
 TestingProgram.Run(0);
 #endif
