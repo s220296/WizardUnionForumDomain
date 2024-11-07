@@ -6,47 +6,53 @@ namespace WU_Test;
 
 public class WizardMessager : IMessageReceiver, IMessageSender
 {
-    public Wizard Wizard { get; protected set; }
+    public IDItem<Wizard> Wizard { get; protected set; }
+    public List<(IMessage, IMessageSender, IMessageReceiver)> Messages;
 
-    public WizardMessager(Wizard _wizard)
+    public WizardMessager(IDItem<Wizard> _wizard)
     {
         (Wizard) = (_wizard);
+
+        Messages = new List<(IMessage, IMessageSender, IMessageReceiver)>();
     }
 
     public bool ReceiveMessage(IMessage _message, IMessageSender _sender)
     {
         if (_sender is null) return false;
 
-        // Store message
-
-        string senderName = _sender.GetSender().ToString();
-
-        if (_sender.GetSender() is Wizard)
-            senderName = (_sender.GetSender() as Wizard).Name.Get();
-
-        Console.WriteLine($"I, {Wizard.Name}, received a message from {senderName}: ");
-        Console.WriteLine($"- {_message.GetAsString()}");
+        Messages.Add((_message, _sender, this));
 
         return true;
     }
 
     public bool SendMessage(IMessage _message, IMessageReceiver _receiver)
     {
-        return _receiver.ReceiveMessage(_message, this);
+        if (_receiver.ReceiveMessage(_message, this))
+        {
+            Messages.Add((_message, this, _receiver));
+            return true;
+        }
+
+        return false;
     }
 
     public object GetSender()
     {
-        return Wizard;
+        return Wizard.GetTypeAndID();
+    }
+
+    public object GetReceiver()
+    {
+        return Wizard.GetTypeAndID();
     }
 }
 
 public class UnionMessager : IMessageReceiver
 {
-    public Union Union { get; protected set; }
+    public IDItem<Union> Union { get; protected set; }
     public List<(IMessage, IMessageSender)> MessageBoard { get; protected set; }
 
-    public UnionMessager(Union _union)
+    public UnionMessager(IDItem<Union> _union)
     {
         (Union) = (_union);
         MessageBoard = new List<(IMessage, IMessageSender)>();
@@ -57,6 +63,11 @@ public class UnionMessager : IMessageReceiver
         MessageBoard.Add((_message, _sender));
 
         return true;
+    }
+
+    public object GetReceiver()
+    {
+        return Union.GetTypeAndID();
     }
 }
 
@@ -73,6 +84,13 @@ public class TextMessage : IMessage
 
     public bool TrySend(IMessageSender _from, IMessageReceiver _to)
     {
-        return _from.SendMessage(this, _to);
+        if (_from.SendMessage(this, _to))
+        {
+            DataSubmission.RecordTextMessage(this, _from, _to);
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -35,11 +35,15 @@ public static class MessagingTest
     {
         IDItem<Wizard>[] wizards = DataAcquirer.AcquireAllWizards();
 
-        UserProfile w1 = new UserProfile(wizards[0], new WizardMessager(wizards[0].Item));
-        UserProfile w2 = new UserProfile(wizards[1], new WizardMessager(wizards[1].Item));
+        UserProfile w1 = new UserProfile(wizards[0], new WizardMessager(wizards[0]));
+        UserProfile w2 = new UserProfile(wizards[1], new WizardMessager(wizards[1]));
 
-        Union union = new Union("All Wizards United", new Condtions(), new Role("Member"));
-        UnionMessager unionMessager = new UnionMessager(union);
+        IDItem<Union> unionID;
+        {
+            Union union = new Union("All Wizards United", new Condtions(), new Role("Member"));
+            unionID = new IDItem<Union>(union, 24);
+        }
+        UnionMessager unionMessager = new UnionMessager(unionID);
 
         bool flip = false;
 
@@ -47,11 +51,13 @@ public static class MessagingTest
         {
             Console.Clear();
 
-            Console.WriteLine($"-- This is the message board of {union.Name} --");
+            Console.WriteLine($"-- This is the message board of {unionID.Item.Name} --");
 
             foreach((IMessage message, IMessageSender sender) message in unionMessager.MessageBoard)
             {
-                Console.WriteLine($"{message.sender.GetSender()} says:");
+                object sender = message.sender.GetSender();
+
+                Console.WriteLine($"{((IDItem<Wizard>)sender).Item.Name} says:");
                 Console.WriteLine($"- {message.message.GetAsString()}\n");
             }
 
