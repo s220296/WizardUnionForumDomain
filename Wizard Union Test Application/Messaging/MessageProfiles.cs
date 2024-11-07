@@ -1,5 +1,6 @@
 ﻿using WizardUnion.Messaging;
 using WizardUnion;
+using WizardUnion.Unions;
 
 namespace WU_Test;
 
@@ -42,22 +43,20 @@ public class WizardMessager : IMessageReceiver, IMessageSender
 
 public class UnionMessager : IMessageReceiver
 {
-    public UnionMessager Union { get; protected set; }
+    public Union Union { get; protected set; }
+    public List<(IMessage, IMessageSender)> MessageBoard { get; protected set; }
 
-    public UnionMessager(UnionMessager _union)
+    public UnionMessager(Union _union)
     {
         (Union) = (_union);
+        MessageBoard = new List<(IMessage, IMessageSender)>();
     }
 
     public bool ReceiveMessage(IMessage _message, IMessageSender _sender)
     {
-        if (_sender.GetSender() is Wizard)
-        {
-            // Store message
-            return true;
-        }
+        MessageBoard.Add((_message, _sender));
 
-        return false;
+        return true;
     }
 }
 

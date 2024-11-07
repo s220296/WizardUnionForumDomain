@@ -9,7 +9,7 @@
 //     -Union members can have roles
 //     -Unions can have entry requirements
 //     -Unions have names
-//     Unions can host message boards internally or between unions
+//     -Unions can host message boards internally or between unions
 //     
 //   -Wizard profiles can be created
 //     -Wizards have names
@@ -18,8 +18,8 @@
 //     -Wizards can register spells
 //     -Wizards have elemental masteries
 //     -Wizards can join unions
-//     Wizards can message on message boards
-//     Wizards can message other wizards
+//     -Wizards can message on message boards
+//     -Wizards can message other wizards
 //
 //   -Places can be registered on the forum
 //     -Places have cycle rates per eon, like universal time zones
