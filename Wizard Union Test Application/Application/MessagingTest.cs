@@ -45,38 +45,14 @@ public static class MessagingTest
         }
         UnionMessager unionMessager = new UnionMessager(unionID);
 
-        bool flip = false;
+        DataAcquirer.FillWizardToWizardTextMessages(new UserProfile[] {w1, w2});
 
-        while (true)
+        foreach ((IMessage, IMessageSender, IMessageReceiver) message in w1.Messager.Messages)
         {
-            Console.Clear();
-
-            Console.WriteLine($"-- This is the message board of {unionID.Item.Name} --");
-
-            foreach((IMessage message, IMessageSender sender) message in unionMessager.MessageBoard)
-            {
-                object sender = message.sender.GetSender();
-
-                Console.WriteLine($"{((IDItem<Wizard>)sender).Item.Name} says:");
-                Console.WriteLine($"- {message.message.GetAsString()}\n");
-            }
-
-            if (flip)
-            {
-                Console.WriteLine($"\n Write a message as Ryan");
-                TextMessage text = new TextMessage(Console.ReadLine());
-                text.TrySend(w1.Messager, unionMessager);
-            }
-            else
-            {
-                Console.WriteLine($"\n Write a message as Harry");
-                TextMessage text = new TextMessage(Console.ReadLine());
-                text.TrySend(w2.Messager, unionMessager);
-            }
-
-            flip = !flip;
-            if (unionMessager.MessageBoard[^1].Item1.GetAsString() == "EXIT")
-                break;
+            Console.WriteLine((message.Item2 as WizardMessager).Wizard.Item.Name + " says:");
+            Console.WriteLine(message.Item1.GetAsString());
+            Console.WriteLine("To " + (message.Item3 as WizardMessager).Wizard.Item.Name);
+            Console.WriteLine("");
         }
     }
 }

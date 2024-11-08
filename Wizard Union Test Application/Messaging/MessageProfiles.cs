@@ -38,13 +38,24 @@ public class WizardMessager : IMessageReceiver, IMessageSender
 
     public object GetSender()
     {
+        return Wizard;
+    }
+    
+    public object GetSenderID()
+    {
         return Wizard.GetTypeAndID();
     }
 
     public object GetReceiver()
     {
+        return Wizard;
+    }
+
+    public object GetReceiverID()
+    {
         return Wizard.GetTypeAndID();
     }
+
 }
 
 public class UnionMessager : IMessageReceiver
@@ -66,6 +77,11 @@ public class UnionMessager : IMessageReceiver
     }
 
     public object GetReceiver()
+    {
+        return Union;
+    }
+
+    public object GetReceiverID()
     {
         return Union.GetTypeAndID();
     }

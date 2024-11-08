@@ -10,7 +10,9 @@ public static class DataSubmission
         if (_message is null || _sender is null || _receiver is null)
             return;
 
-        IDTypeItem sender = (IDTypeItem)_sender.GetSender();
-        IDTypeItem receiver = (IDTypeItem)_receiver.GetReceiver();
+        IDTypeItem sender = (IDTypeItem)_sender.GetSenderID();
+        IDTypeItem receiver = (IDTypeItem)_receiver.GetReceiverID();
+
+        // INCOMPELTE
     }
 }

@@ -23,6 +23,62 @@ public static class DataAcquirer
         connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\.GitHub\\WizardUnionForumDomain\\WizardUnionDB\\ForumData.mdf;Integrated Security=True;Connect Timeout=30";
     }
 
+    public static void FillWizardToWizardTextMessages(UserProfile[] _wizards)
+    {
+        InitializeConntectionString();
+
+        using (connection = new SqlConnection(connectionString))
+        using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM TextMessages", connection))
+        {
+            // Initialize Data table
+            DataTable messageTable = new DataTable();
+            int rows = adapter.Fill(messageTable);
+            // Initialize lists
+            List<IDItem<TextMessage>> messages = new List<IDItem<TextMessage>>(rows);
+            List<(int sender, int receiver)> senderReceivers = new List<(int, int)>(rows);
+            // Write data from table into lists
+            for (int i = 0; i < rows; i++)
+            {
+                if (messageTable.Rows[i]["WizardReceiverID"] is DBNull)
+                {
+                    // This function overload is only for wizard to wizard messages
+                    continue;
+                }
+
+                TextMessage message = new TextMessage((string)messageTable.Rows[i]["Message"]);
+                messages.Add(new IDItem<TextMessage>(message, (int)messageTable.Rows[i]["Id"]));
+                
+                int senderID = (int)messageTable.Rows[i]["WizardSenderID"];
+                int receiverID = (int)messageTable.Rows[i]["WizardReceiverID"];
+
+                senderReceivers.Add((senderID, receiverID));
+            }
+            // Assign data to user profiles / messagers
+            for (int i = 0; i < messages.Count && i < senderReceivers.Count; i++)
+            {
+                UserProfile sender = _wizards[0];
+                UserProfile receiver = _wizards[0];
+
+                bool gotSender = false;
+                bool gotReceiver = false;
+
+                for (int wizard = 0; wizard < _wizards.Length; wizard++) 
+                {
+                    if (senderReceivers[i].sender == _wizards[wizard].Wizard.ID)
+                    { sender = _wizards[wizard]; gotSender = true; }
+                    if (senderReceivers[i].receiver == _wizards[wizard].Wizard.ID)
+                    { receiver = _wizards[wizard]; gotReceiver = true; }
+                }
+
+                if (gotSender && gotReceiver)
+                {
+                    sender.Messager.Messages.Add((messages[i].Item, sender.Messager, receiver.Messager));
+                    receiver.Messager.Messages.Add((messages[i].Item, sender.Messager, receiver.Messager));
+                }
+            }
+        }
+    }
+
     public static IDItem<Wizard>[] AcquireAllWizards()
     {
         InitializeConntectionString();
