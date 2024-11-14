@@ -37,6 +37,7 @@ public static class DataAcquirer
             List<IDItem<TextMessage>> messages = new List<IDItem<TextMessage>>(rows);
             List<(int sender, int receiver)> senderReceivers = new List<(int, int)>(rows);
             // Write data from table into lists
+
             for (int i = 0; i < rows; i++)
             {
                 if (messageTable.Rows[i]["WizardReceiverID"] is DBNull)

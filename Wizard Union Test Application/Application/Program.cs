@@ -33,11 +33,17 @@
 #define STANDARD_TEST
 #define ALL_TEST
 #define MESSAGE_TEST
+#define FULL_MESSAGE_DEMO
 
 #undef ALL_TEST
 #undef STANDARD_TEST
+#undef MESSAGE_TEST
 
 using WU_Test;
+
+#if FULL_MESSAGE_DEMO
+FullMessagerDemo.Run(0);
+#endif
 
 #if MESSAGE_TEST || ALL_TEST
 Console.WriteLine("MESSAGE_TEST\n");

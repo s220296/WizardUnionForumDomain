@@ -1,0 +1,1 @@
+﻿SELECT * FROM Wizards WHERE Name='Harry'
