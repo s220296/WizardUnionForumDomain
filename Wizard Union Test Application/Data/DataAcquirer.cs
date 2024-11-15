@@ -80,6 +80,30 @@ public static class DataAcquirer
         }
     }
 
+    public static IDItem<Wizard> GetWizardByName(string _name)
+    {
+        InitializeConntectionString();
+
+        using (connection = new SqlConnection(connectionString))
+        using (SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM Wizards WHERE Name='{_name}'", connection))
+        {
+            DataTable dt = new DataTable();
+            int rows = adapter.Fill(dt);
+
+            if (rows <= 0) throw new InvalidDataException($"There are no wizards with the name {_name}");
+            // NOTE: there may be multiple wizards of the same name
+
+            BirthDetails birth = new BirthDetails(Universe.Place, 0.5d);
+            MagicProfile magic = new MagicProfile(new SpellMastery("Fire"), SpellProfileList.Empty);
+
+            SingleName name = new SingleName((string)dt.Rows[0]["Name"]);
+
+            Wizard wizard = new Wizard(name, birth, magic);
+
+            return new IDItem<Wizard>(wizard, (int)dt.Rows[0]["Id"]);
+        }
+    }
+
     public static IDItem<Wizard>[] AcquireAllWizards()
     {
         InitializeConntectionString();
