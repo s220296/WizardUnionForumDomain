@@ -58,15 +58,37 @@ public static class FullMessagerDemo
 
         int messagesLength = messagesToRecipient.Length + messagesFromRecipient.Length;
 
-        (TextMessage text, bool isRecip)[] messages = new (TextMessage text, bool isRecip)[messagesLength];
+        (TextMessage text, bool toRecip)[] messages = new (TextMessage text, bool isRecip)[messagesLength];
+
+        int toRecip = 0, fromRecip = 0;
 
         for(int i = 0; i < messages.Length; i++)
         {
-            // Fill messages in order
+            // If message to recipient is chronologically (based on ID) earlier than from recipient
+            if (messagesToRecipient[toRecip].ID < messagesFromRecipient[fromRecip].ID)
+            {
+                messages[i] = (messagesToRecipient[toRecip].Item, true);
+
+                toRecip++;
+            }
+            else // If message from recipient is chronologically earlier
+            {
+                messages[i] = (messagesFromRecipient[fromRecip].Item, false);
+
+                fromRecip++;
+            }
+
+            if (messages[i].toRecip)
+            {
+                AddToPreWrite($"{s_user.Wizard.Item.Name} to {s_recipient.Wizard.Item.Name}:\n");
+                AddToPreWrite($"{messages[i].text}\n\n");
+            }
         }
 
         while (true)
         {
+            WritePreWrite();
+
             Console.WriteLine($"Send a message to {s_recipient.Wizard.Item.Name} as {s_user.Wizard.Item.Name}.");
 
             string input = Console.ReadLine();
