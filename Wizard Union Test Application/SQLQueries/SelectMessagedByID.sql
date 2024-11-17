@@ -1,0 +1,1 @@
+﻿SELECT Id, Message FROM TextMessages WHERE WizardSenderID='1' AND WizardReceiverID='2'

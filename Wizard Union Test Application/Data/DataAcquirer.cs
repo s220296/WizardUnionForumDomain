@@ -23,6 +23,34 @@ public static class DataAcquirer
         connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\.GitHub\\WizardUnionForumDomain\\WizardUnionDB\\ForumData.mdf;Integrated Security=True;Connect Timeout=30";
     }
 
+    public static IDItem<TextMessage>[] GetMessagesToWizardFrom(int _senderID, int _receiverID)
+    {
+        InitializeConntectionString();
+
+        string query = $"SELECT Id, Message FROM TextMessages WHERE WizardSenderID='{_senderID}'" +
+            $"AND WizardReceiverID='{_receiverID}'";
+
+        using (connection = new SqlConnection(connectionString))
+        using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
+        {
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            IDItem<TextMessage>[] result = new IDItem<TextMessage>[dataTable.Rows.Count];
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                // If message is null, maybe occurs during some refactor?
+                if (dataTable.Rows[i]["Message"] is DBNull) continue;
+
+                TextMessage message = new TextMessage((string)dataTable.Rows[i]["Message"]);
+                result[i] = new IDItem<TextMessage>(message, (int)dataTable.Rows[i]["Id"]);
+            }
+
+            return result;
+        }
+    }
+
     public static void FillWizardToWizardTextMessages(UserProfile[] _wizards)
     {
         InitializeConntectionString();
