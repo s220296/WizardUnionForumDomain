@@ -17,6 +17,9 @@ public static class FullMessagerDemo
         {
             IDItem<Wizard> wizard = DataAcquirer.GetWizardByName(_name);
 
+            if ((s_user != null && s_user.Wizard.ID == wizard.ID) || (s_recipient != null && s_recipient.Wizard.ID == wizard.ID))
+                return false;
+
             if (!_recipient)
                 s_user = new UserProfile(wizard, new WizardMessager(wizard));
             else // if recipient
@@ -64,26 +67,32 @@ public static class FullMessagerDemo
 
         for(int i = 0; i < messages.Length; i++)
         {
+            int toID = toRecip < messagesToRecipient.Length ? messagesToRecipient[toRecip].ID : int.MaxValue;
+            int fromID = fromRecip < messagesFromRecipient.Length ? messagesFromRecipient[fromRecip].ID : int.MaxValue;
+
             // If message to recipient is chronologically (based on ID) earlier than from recipient
-            if (messagesToRecipient[toRecip].ID < messagesFromRecipient[fromRecip].ID)
+            if (toID < fromID)
             {
                 messages[i] = (messagesToRecipient[toRecip].Item, true);
 
                 toRecip++;
             }
-            else // If message from recipient is chronologically earlier
+            else if (fromID < toID) // If message from recipient is chronologically earlier
             {
                 messages[i] = (messagesFromRecipient[fromRecip].Item, false);
 
                 fromRecip++;
             }
+            // There should be no case where toID and fromID are equal, unless messaging self (prevented in SelectWizard())
 
             if (messages[i].toRecip)
-            {
                 AddToPreWrite($"{s_user.Wizard.Item.Name} to {s_recipient.Wizard.Item.Name}:\n");
-                AddToPreWrite($"{messages[i].text}\n\n");
-            }
+            else // If recipient to sender
+                AddToPreWrite($"{s_recipient.Wizard.Item.Name} to {s_user.Wizard.Item.Name}:\n");
+            AddToPreWrite($"{messages[i].text.Text}\n\n");
         }
+
+        Console.Clear();
 
         while (true)
         {
@@ -94,6 +103,7 @@ public static class FullMessagerDemo
             string input = Console.ReadLine();
             if (input.Equals("quit")) break;
 
+            DataSubmission.RecordTextMessage(new TextMessage(input), s_recipient.Messager, s_user.Messager);
 
             Console.Clear();
         }

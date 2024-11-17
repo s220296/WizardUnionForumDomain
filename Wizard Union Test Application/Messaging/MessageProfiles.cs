@@ -98,6 +98,11 @@ public class TextMessage : IMessage
         return Text;
     }
 
+    public override string ToString()
+    {
+        return GetAsString();
+    }
+
     public bool TrySend(IMessageSender _from, IMessageReceiver _to)
     {
         if (_from.SendMessage(this, _to))
