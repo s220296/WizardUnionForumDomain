@@ -37,7 +37,34 @@ public static class FullMessagerDemo
 
     public static void Run(int _args)
     {
+        while (true)
+        {
+            RunLoop(_args);
+
+            Console.WriteLine("Write 'exit' to exit or press enter to continue");
+            if (Console.ReadLine().Equals("exit")) return;
+
+            Console.Clear();
+        }
+    }
+
+    private static void RunLoop(int _args)
+    {
         s_preWrite = new string("");
+        s_user = null;
+        s_recipient = null;
+
+        AddToPreWrite("Write 'quit' to quit\n");
+
+        Console.WriteLine("\tLIST OF WIZARD NAMES");
+        {
+            IDItem<Wizard>[] wizards = DataAcquirer.AcquireAllWizards();
+            foreach (IDItem<Wizard> wiz in wizards)
+            {
+                Console.WriteLine(wiz.Item.Name);
+            }
+        }
+        Console.WriteLine("\n");
 
         Console.WriteLine("Select a Wizard to become by entering their name");
         while (!SelectWizard(Console.ReadLine(), false))
@@ -50,7 +77,7 @@ public static class FullMessagerDemo
         while (!SelectWizard(Console.ReadLine(), true))
         { }
 
-        AddToPreWrite($"Wizard {s_recipient.Wizard.Item.Name} is the recipient\n");
+        AddToPreWrite($"Wizard {s_recipient.Wizard.Item.Name} is the recipient\n\n");
         Console.WriteLine($"Wizard {s_recipient.Wizard.Item.Name} was successfully selected as the recipient");
 
         Console.Clear();
@@ -100,10 +127,20 @@ public static class FullMessagerDemo
 
             Console.WriteLine($"Send a message to {s_recipient.Wizard.Item.Name} as {s_user.Wizard.Item.Name}.");
 
-            string input = Console.ReadLine();
-            if (input.Equals("quit")) break;
+            string input = "";
 
-            DataSubmission.RecordTextMessage(new TextMessage(input), s_recipient.Messager, s_user.Messager);
+            do
+            {
+                input = Console.ReadLine();
+
+                if (input.Equals("quit")) return;
+            }
+            while (string.IsNullOrWhiteSpace(input));
+
+            DataSubmission.RecordTextMessage(new TextMessage(input), s_user.Messager, s_recipient.Messager);
+
+            AddToPreWrite($"{s_user.Wizard.Item.Name} to {s_recipient.Wizard.Item.Name}:\n");
+            AddToPreWrite($"{input}\n\n");
 
             Console.Clear();
         }
