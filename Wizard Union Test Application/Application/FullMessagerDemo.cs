@@ -111,7 +111,7 @@ public static class FullMessagerDemo
 
                 // Will continue to refresh every second
                 CancelToken token = new CancelToken();
-                RefreshPage(1000, token);
+                /*async*/ RefreshPage(50, token);
 
                 input = Console.ReadLine();
 
@@ -131,11 +131,10 @@ public static class FullMessagerDemo
     {
         while (s_keepRefreshing && !_token.cancel)
         {
-            await Task.Delay(_milliInterval);
-
             string prePreWrite = GetFullPreWrite();
 
             await Task.Run(AddDbMessagesToPreWrite);
+            await Task.Delay(_milliInterval);
 
             if (!prePreWrite.Equals(GetFullPreWrite()))
             {
